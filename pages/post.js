@@ -1,4 +1,4 @@
-import Layout from '../components/MyLayout.js';
+import Layout from '../components/Layout.js';
 import { withRouter } from 'next/router';
 import Markdown from 'react-markdown';
 

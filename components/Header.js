@@ -1,18 +1,20 @@
 import Link from 'next/link';
 
-const linkStyle = {
-  marginRight: 15
-};
+const titleBarStyle = {
+  position: 'fixed',
+  display: 'flex',
+  alignItems: 'center',
+  height: '50px',
+  width: '100%',
+  background: 'green',
+  margin: 0,
+  userSelect: 'none',
+  top: 0,
+  left: 0
+}
 
 const Header = () => (
-  <div>
-    <Link href="/">
-      <a style={linkStyle}>Home</a>
-    </Link>
-    <Link href="/about">
-      <a style={linkStyle}>About</a>
-    </Link>
-  </div>
+  <div style={titleBarStyle}/>
 );
 
 export default Header;
