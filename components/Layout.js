@@ -1,37 +1,52 @@
 import Header from './Header';
-import Head from 'next/head';
+import dynamic from 'next/dynamic'
 
-const tempStyles = {
-  top: '50px',
-  backgroundColor: 'red',
-  height: 'calc(100% - 50px)',
-  width: '100%'
-};
+const LeafletMap = dynamic(() => import('react-leaflet').then(module => {
+  const { Map } = module;
+  return Map;
+}), {
+  ssr: false,
+})
+
+const TileLayer = dynamic(() => import('react-leaflet').then(module => {
+  const { TileLayer } = module;
+  return TileLayer;
+}), {
+  ssr: false,
+})
 
 const Layout = (props) => (
   <div>
-    <Head>
-      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css" />
-      <script src="../dist/react-leaflet.min.js"></script>
-    </Head>
     <Header />
-    <div style={tempStyles}/>
+    <LeafletMap
+      id='mapid'
+      zoom={16}
+      center={[51.74815077681456, -1.2823574152093544]}
+    >
+      <TileLayer
+        url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+      />
+    </LeafletMap>
     <style jsx global>{`
     * {
       box-sizing: border-box;
     }
-
     body {
       margin: 0;
       padding: 0;
     }
-
     // expanding all elements from html down to next.js jsx wrapper
-    html, body, #__next, #__next div {
+    html, body {
       width: 100%;
       height: 100%;
     }
-
+    #__next, #__next > div, #__next> div> div {
+      height: 100%;
+      width: 100%;
+    }
+    #mapid {
+      height: calc(100% - 50px);
+    }
     `}</style>
   </div>
 );
