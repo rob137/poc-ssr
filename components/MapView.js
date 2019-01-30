@@ -81,6 +81,15 @@ export default class MapView extends Component {
   }
 
   render() {
+    const drawControls = {
+      polyline: true,
+      circle: false,
+      rectangle: false,
+      marker: false,
+      polygon: false,
+      circlemarker: false,
+    };
+
     return (
       <div>
         <LeafletMap
@@ -95,6 +104,7 @@ export default class MapView extends Component {
           <FeatureGroup>
             <EditControl
               position="topright"
+              draw={drawControls}
             />
             {this.state.featureCollection.length > 0 && this.drawLines(this.state.featureCollection)}
           </FeatureGroup>
