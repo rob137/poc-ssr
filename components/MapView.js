@@ -41,13 +41,14 @@ export default class MapView extends Component {
     super(props);
     this.state = {
       featureCollection: [],
+      api: `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=${process.env.MAPBOX}`,
     }
   }
 
   generateData() {
     new Promise((resolve, reject) => {
       const line = [];
-      for (let i = 0; i < 10000; i++) {
+      for (let i = 0; i < 10; i++) {
         line.push(L.latLng((Math.random() / 1000) + 51.747, (Math.random() / 1000) - 1.282868));
       }
       resolve(line);
@@ -99,7 +100,8 @@ export default class MapView extends Component {
           style={{ height: 'calc(100% - 50px)' }}
         >
           <TileLayer
-            url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+            url={this.state.api}
+            id={'mapbox.streets'}
           />
           <FeatureGroup>
             <EditControl
