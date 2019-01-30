@@ -12,5 +12,24 @@ export default () => (
       <link rel="stylesheet" href="../static/leaflet_1.3.1.css" />
     </Head>
     <Layout />
+    <style jsx global>{`
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    // expanding all elements from html down to next.js jsx wrapper
+    html,
+    body,
+    #__next,
+    #__next > div,
+    #__next > div > div,
+    #__next > div > div > div {
+      height: 100%;
+      width: 100%;
+    }
+    `}</style>
   </div>
 )
