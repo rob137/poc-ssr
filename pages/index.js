@@ -10,6 +10,7 @@ export default () => (
   <div style={style}>
     <Head>
       <link rel="stylesheet" href="../static/leaflet_1.3.1.css" />
+      <script src="../static/leaflet.1.4.0.js"></script>
     </Head>
     <Layout />
     <style jsx global>{`
