@@ -1,4 +1,5 @@
 import Header from './Header';
+import Head from 'next/head';
 
 const tempStyles = {
   top: '50px',
@@ -9,6 +10,10 @@ const tempStyles = {
 
 const Layout = (props) => (
   <div>
+    <Head>
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css" />
+      <script src="../dist/react-leaflet.min.js"></script>
+    </Head>
     <Header />
     <div style={tempStyles}/>
     <style jsx global>{`
