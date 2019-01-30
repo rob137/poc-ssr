@@ -29,6 +29,13 @@ const Polyline = dynamic(() => import('react-leaflet').then(module => {
   ssr: false,
 });
 
+const EditControl = dynamic(() => import('react-leaflet-draw').then(module => {
+  const { EditControl } = module;
+  return EditControl;
+}), {
+  ssr: false,
+});
+
 export default class MapView extends Component {
   constructor(props) {
     super(props);
@@ -86,6 +93,9 @@ export default class MapView extends Component {
             url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
           />
           <FeatureGroup>
+            <EditControl
+              position="topright"
+            />
             {this.state.featureCollection.length > 0 && this.drawLines(this.state.featureCollection)}
           </FeatureGroup>
         </LeafletMap>
