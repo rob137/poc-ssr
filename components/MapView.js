@@ -127,6 +127,8 @@ export default class MapView extends Component {
             url={this.state.api}
             id={'mapbox.streets'}
             attribution={attribution}
+            accessToken={process.env.MAPBOX}
+            maxNativeZoom={25}
           />
           <ZoomControl position="topright" />
           <FeatureGroup>
