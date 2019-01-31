@@ -130,18 +130,13 @@ export default class MapView extends Component {
       marginBottom: '10px',
     }
 
-    const InnerStyle = {
-      backgroundColor: '#fff',
-      color: 'rgb(0, 0, 0)',
-      cursor: 'pointer',
-      width: '100%',
-      height: '100%',
-      userSelect: 'none',
-      borderRadius: '2px',
-      fontSize: '16px',
+    const SearchSetStyle = {
       display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+      flexDirection: 'rowReverse',
+    }
+
+    const SearchStyle = {
+      fontSize: '14px',
     }
 
     const mapBoxAPIURL = this.state.satellite ?
@@ -186,8 +181,58 @@ export default class MapView extends Component {
               <span
                 className="icon-stack"
                 onClick={() => this.toggleSatellite(this.state.satellite)}
-                style={InnerStyle}
-              />
+              >
+                <style jsx>{`
+                {
+                  background-color: #fff;
+                  color: rgb(0, 0, 0);
+                  cursor: pointer;
+                  width: 100%;
+                  height: 100%;
+                  user-select: none;
+                  border-radius: 2px;
+                  font-size: 16px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+            
+                  :hover {
+                    background-color: #f4f4f4;
+                  }`}
+                </style>
+              </span>
+            </div>
+            <div style={SearchSetStyle}>
+              <div
+                style={ControlStyle}
+                // onClick={() => this.props.setShowSearchBox(!this.props.showSearchBox)}
+              >
+                <span className="icon-search">
+                  <style jsx>{`{
+                    background-color: #fff;
+                    color: rgb(0, 0, 0);
+                    cursor: pointer;
+                    width: 100%;
+                    height: 100%;
+                    user-select: none;
+                    border-radius: 2px;
+                    font-size: 16px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    :hover {
+                      background-color: #f4f4f4;
+                    }`}
+                  </style>
+                </span>
+              </div>
+              {this.props.showSearchBox &&
+                <SearchBox
+                  // tripList={this.props.tripList}
+                  // fetchTrip={this.props.fetchTrip}
+                />
+              }
             </div>
           </div>
         </LeafletMap>
