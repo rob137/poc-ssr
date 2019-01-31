@@ -1,8 +1,8 @@
-import Header from './Header';
+import TitleBar from './TitleBar';
 
 const Layout = (props) => (
   <div>
-    <Header />
+    <TitleBar />
     {props.children}
   </div>
 );
