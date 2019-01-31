@@ -145,7 +145,7 @@ export default class MapView extends Component {
           <div className="customControls">
             <div className="customControls_control">
               <span
-                className="customControls_control-inner"
+                className={'icon-stack customControls_control-inner'}
                 onClick={() => this.toggleSatellite(this.state.satellite)}
               />
             </div>
@@ -154,7 +154,7 @@ export default class MapView extends Component {
                 className="customControls_control"
                 // onClick={() => this.props.setShowSearchBox(!this.props.showSearchBox)}
               >
-                <span className="icon-search" />
+                <span className={'icon-search customControls_control-inner customControls_control-search'} />
               </div>
               {this.props.showSearchBox &&
                 <SearchBox
