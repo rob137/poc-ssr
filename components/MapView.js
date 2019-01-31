@@ -49,7 +49,7 @@ export default class MapView extends Component {
     super(props);
     this.state = {
       featureCollection: [],
-      api: `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=${process.env.MAPBOX}`,
+      satellite: true,
     }
   }
 
@@ -104,6 +104,9 @@ export default class MapView extends Component {
       width: '100%',
     }
 
+    const mapBoxAPIURL = this.state.satellite ?
+      'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}' :
+      'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=${process.env.MAPBOX}';
     const attribution = `Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>
     contributors,<a href=https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery ©
     <a href="https://www.mapbox.com/">Mapbox</a>`;
@@ -124,7 +127,7 @@ export default class MapView extends Component {
           maxZoom={25}
         >
           <TileLayer
-            url={this.state.api}
+            url={mapBoxAPIURL}
             id={'mapbox.streets'}
             attribution={attribution}
             accessToken={process.env.MAPBOX}
