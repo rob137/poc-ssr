@@ -112,6 +112,8 @@ export default class MapView extends Component {
           center={[51.74815077681456, -1.2823574152093544]}
           style={{ height: 'calc(100% - 50px)' }}
           zoomControl={false}
+          preferCanvas={true}
+          maxZoom={25}
         >
           <TileLayer
             url={this.state.api}
