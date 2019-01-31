@@ -37,6 +37,13 @@ const EditControl = dynamic(() => import('react-leaflet-draw').then(module => {
   ssr: false,
 });
 
+const ZoomControl = dynamic(() => import('react-leaflet').then(module => {
+  const { ZoomControl } = module;
+  return ZoomControl;
+}), {
+  ssr: false,
+});
+
 export default class MapView extends Component {
   constructor(props) {
     super(props);
@@ -104,11 +111,13 @@ export default class MapView extends Component {
           zoom={16}
           center={[51.74815077681456, -1.2823574152093544]}
           style={{ height: 'calc(100% - 50px)' }}
+          zoomControl={false}
         >
           <TileLayer
             url={this.state.api}
             id={'mapbox.streets'}
           />
+          <ZoomControl position="topright" />
           <FeatureGroup>
             <EditControl
               position="topright"
