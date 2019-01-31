@@ -1,10 +1,9 @@
 import Header from './Header';
-import MapView from './MapView';
 
 const Layout = (props) => (
   <div>
     <Header />
-    <MapView />
+    {props.children}
   </div>
 );
 

@@ -1,5 +1,5 @@
 import Layout from '../components/Layout';
-import Head from 'next/head';
+import MapView from '../components/MapView';
 
 const style = {
   height: '100%',
@@ -8,12 +8,9 @@ const style = {
 
 export default () => (
   <div style={style}>
-    <Head>
-      <link rel="stylesheet" href="../static/leaflet_1.3.1.css" />
-      <link rel="stylesheet" href="../static/leaflet-draw/leaflet.draw.css" />
-      <script src="../static/leaflet.1.4.0.js"></script>
-    </Head>
-    <Layout />
+    <Layout>
+      <MapView />
+    </Layout>
     <style jsx global>{`
       * {
         box-sizing: border-box;
