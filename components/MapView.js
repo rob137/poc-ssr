@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
+import '../static/MapView.scss';
 import Head from 'next/head';
 
 const LeafletMap = dynamic(() => import('react-leaflet').then(module => {
@@ -103,50 +104,15 @@ export default class MapView extends Component {
       polygon: false,
       circlemarker: false,
     };
-
-    const MapViewStyle = {
-      height: 'calc(100% - 50px)',
-      width: '100%',
-    }
-
-    const CustomControlStyle = { 
-      position: 'absolute',
-      zIndex: 400,
-      top: '205px',
-      right: '10px',
-      userSelect: 'none',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-end',
-    }
-
-    const ControlStyle = {
-      backgroundColor: 'rgba(0, 0, 0, 0.2)',
-      borderCadius: '2px',
-      width: '34px',
-      height: '34px',
-      padding: '2px',
-      // For spacing between
-      marginBottom: '10px',
-    }
-
-    const SearchSetStyle = {
-      display: 'flex',
-      flexDirection: 'rowReverse',
-    }
-
-    const SearchStyle = {
-      fontSize: '14px',
-    }
-
     const mapBoxAPIURL = this.state.satellite ?
       'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}' :
       `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=${process.env.MAPBOX}`;
     const attribution = `Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>
     contributors,<a href=https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery ©
     <a href="https://www.mapbox.com/">Mapbox</a>`;
+
     return (
-      <div className="MapView" style={MapViewStyle}>
+      <div className="MapView">
         <Head>
           <link rel="stylesheet" href="../static/leaflet_1.3.1.css" />
           <link rel="stylesheet" href="../static/leaflet-draw/leaflet.draw.css" />
@@ -176,56 +142,19 @@ export default class MapView extends Component {
             />
             {this.state.featureCollection.length > 0 && this.drawLines(this.state.featureCollection)}
           </FeatureGroup>
-          <div style={CustomControlStyle}>
-            <div style={ControlStyle}>
+          <div className="customControls">
+            <div className="customControls_control">
               <span
-                className="icon-stack"
+                className="customControls_control-inner"
                 onClick={() => this.toggleSatellite(this.state.satellite)}
-              >
-                <style jsx>{`
-                {
-                  background-color: #fff;
-                  color: rgb(0, 0, 0);
-                  cursor: pointer;
-                  width: 100%;
-                  height: 100%;
-                  user-select: none;
-                  border-radius: 2px;
-                  font-size: 16px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-            
-                  :hover {
-                    background-color: #f4f4f4;
-                  }`}
-                </style>
-              </span>
+              />
             </div>
-            <div style={SearchSetStyle}>
+            <div className="customControls_searchSet">
               <div
-                style={ControlStyle}
+                className="customControls_control"
                 // onClick={() => this.props.setShowSearchBox(!this.props.showSearchBox)}
               >
-                <span className="icon-search">
-                  <style jsx>{`{
-                    background-color: #fff;
-                    color: rgb(0, 0, 0);
-                    cursor: pointer;
-                    width: 100%;
-                    height: 100%;
-                    user-select: none;
-                    border-radius: 2px;
-                    font-size: 16px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-
-                    :hover {
-                      background-color: #f4f4f4;
-                    }`}
-                  </style>
-                </span>
+                <span className="icon-search" />
               </div>
               {this.props.showSearchBox &&
                 <SearchBox
