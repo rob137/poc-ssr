@@ -52,9 +52,15 @@ const ZoomControl = dynamic(() => import('react-leaflet').then(module => {
   ssr: false,
 });
 
-export default class MapView extends Component<any, any>{
-  constructor(props: any) {
-    super(props);
+
+interface MapViewState {
+  featureCollection: any[];
+  satellite: boolean;
+}
+
+export default class MapView extends Component<{}, MapViewState>{
+  constructor() {
+    super({});
     this.state = {
       featureCollection: [],
       satellite: false,
@@ -95,7 +101,7 @@ export default class MapView extends Component<any, any>{
   }
 
     // i.e. Satellite vs Map views
-    toggleSatellite(satellite: any) {
+    toggleSatellite(satellite: boolean) {
       this.setState({ satellite: !satellite });
     }
 
