@@ -2,6 +2,7 @@ import { Component } from 'react';
 import dynamic from 'next/dynamic';
 import '../static/MapView.scss';
 import Head from 'next/head';
+import classnames from 'classnames';
 
 const LeafletMap = dynamic(() => import('react-leaflet').then(module => {
   const { Map } = module;
@@ -145,7 +146,7 @@ export default class MapView extends Component {
           <div className="customControls">
             <div className="customControls_control">
               <span
-                className={'icon-stack customControls_control-inner'}
+                className={classnames('icon-stack', 'customControls_control-inner')}
                 onClick={() => this.toggleSatellite(this.state.satellite)}
               />
             </div>
@@ -154,7 +155,11 @@ export default class MapView extends Component {
                 className="customControls_control"
                 // onClick={() => this.props.setShowSearchBox(!this.props.showSearchBox)}
               >
-                <span className={'icon-search customControls_control-inner customControls_control-search'} />
+                <span 
+                  className={
+                    classnames('icon-search', 'customControls_control-inner', 'customControls_control-search')
+                  }
+                  />
               </div>
               {this.props.showSearchBox &&
                 <SearchBox
