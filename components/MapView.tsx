@@ -1,8 +1,31 @@
 import { Component } from 'react';
+import SearchBox from './SearchBox';
 import dynamic from 'next/dynamic';
 import '../static/MapView.scss';
 import Head from 'next/head';
 import classnames from "classnames";
+
+interface MapViewState {
+  featureCollection: any[];
+  satellite: boolean;
+  showSearchBox: boolean;
+  tripList: Trip[];
+}
+
+export interface RequestBody {
+  vehicle: string;
+  sensor: string;
+  interval: string;
+  start_time: string;
+  end_time: string;
+}
+
+export interface Trip {
+  end_time: string;
+  start_time: string;
+  trip_id: number;
+  vehicle: string;
+}
 
 // @ts-ignore
 const LeafletMap = dynamic(() => import('react-leaflet').then(module => {
@@ -52,19 +75,74 @@ const ZoomControl = dynamic(() => import('react-leaflet').then(module => {
   ssr: false,
 });
 
-
-interface MapViewState {
-  featureCollection: any[];
-  satellite: boolean;
-}
-
 export default class MapView extends Component<{}, MapViewState>{
   constructor() {
     super({});
     this.state = {
       featureCollection: [],
       satellite: false,
+      showSearchBox: false,
+      tripList: [],
     }
+  }
+
+  getTripList() {
+    fetch('http://localhost:5000/trips')
+    .then((res) => {
+      if (!res.ok) {
+        return Promise.reject(res.statusText);
+      }
+      return res.json();
+    })
+    .then((data) => {
+      this.setTripList(data);
+    })
+    .catch((err) => console.error(err));
+  }
+
+  setTripList(tripList: Trip[]) {
+    this.setState({ tripList: tripList });
+  }
+
+  // Queries the API for a line to display on map.
+  fetchTrip(body: RequestBody) {
+    return fetch(`http://localhost:5000/telemetry/rangewithres`, {
+      method: 'post',
+      body: JSON.stringify(body),
+    })
+    .then((res) => {
+      if (!res.ok) {
+        return Promise.reject(res.statusText);
+      }
+      return res.json();
+    })
+    .then((data) => {
+      const line = data
+      .map((rawData: any) => {
+        const lat = rawData.raw_sensor_data.latitude;
+        const lng = rawData.raw_sensor_data.longitude;
+        // @ts-ignore
+        return L.latLng(lat, lng);
+      });
+      return [{
+        _latlngs: line,
+        editing: {
+          latlngs: [line],
+        },
+      }];
+    })
+    .then((featureCollection) => {
+      if (this.state.featureCollection.length === 0) {
+        this.setFeatureCollection(featureCollection);
+      } else {
+        // this.addLayer(featureCollection[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      console.log('Request to API failed.  Displaying randomly-generated line instead.');
+      return this.generateData();
+    });
   }
 
   generateData() {
@@ -103,6 +181,10 @@ export default class MapView extends Component<{}, MapViewState>{
     // i.e. Satellite vs Map views
     toggleSatellite(satellite: boolean) {
       this.setState({ satellite: !satellite });
+    }
+
+    setShowSearchBox(showSearchBox: boolean) {
+      this.setState({ showSearchBox });
     }
 
   componentDidMount() {
@@ -165,7 +247,7 @@ export default class MapView extends Component<{}, MapViewState>{
             <div className="customControls_searchSet">
               <div
                 className="customControls_control"
-                // onClick={() => this.props.setShowSearchBox(!this.props.showSearchBox)}
+                onClick={() => this.setShowSearchBox(!this.state.showSearchBox)}
               >
                 <span 
                   className={
@@ -173,12 +255,12 @@ export default class MapView extends Component<{}, MapViewState>{
                   }
                   />
               </div>
-              {/* {this.props.showSearchBox &&
+              {this.state.showSearchBox &&
                 <SearchBox
-                  tripList={this.props.tripList}
-                  fetchTrip={this.props.fetchTrip}
+                  tripList={[]}
+                  fetchTrip={this.fetchTrip}
                 />
-              } */}
+              }
             </div>
           </div>
         </LeafletMap>
