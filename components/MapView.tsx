@@ -1,8 +1,9 @@
 import { Component } from 'react';
 import SearchBox from './SearchBox';
 import dynamic from 'next/dynamic';
-import '../static/MapView.scss';
 import Head from 'next/head';
+import '../static/MapView.scss';
+import fetch from 'isomorphic-unfetch';
 import classnames from "classnames";
 
 interface MapViewState {
@@ -189,6 +190,7 @@ export default class MapView extends Component<{}, MapViewState>{
 
   componentDidMount() {
     this.generateData();
+    this.getTripList();
   }
 
   render() {
