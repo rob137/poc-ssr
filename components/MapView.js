@@ -49,7 +49,7 @@ export default class MapView extends Component {
     super(props);
     this.state = {
       featureCollection: [],
-      satellite: true,
+      satellite: false,
     }
   }
 
@@ -85,6 +85,11 @@ export default class MapView extends Component {
     });
   }
 
+    // i.e. Satellite vs Map views
+    toggleSatellite(satellite) {
+      this.setState({ satellite: !satellite });
+    }
+
   componentDidMount() {
     this.generateData();
   }
@@ -104,9 +109,44 @@ export default class MapView extends Component {
       width: '100%',
     }
 
+    const CustomControlStyle = { 
+      position: 'absolute',
+      zIndex: 400,
+      top: '205px',
+      right: '10px',
+      userSelect: 'none',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-end',
+    }
+
+    const ControlStyle = {
+      backgroundColor: 'rgba(0, 0, 0, 0.2)',
+      borderCadius: '2px',
+      width: '34px',
+      height: '34px',
+      padding: '2px',
+      // For spacing between
+      marginBottom: '10px',
+    }
+
+    const InnerStyle = {
+      backgroundColor: '#fff',
+      color: 'rgb(0, 0, 0)',
+      cursor: 'pointer',
+      width: '100%',
+      height: '100%',
+      userSelect: 'none',
+      borderRadius: '2px',
+      fontSize: '16px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }
+
     const mapBoxAPIURL = this.state.satellite ?
       'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}' :
-      'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=${process.env.MAPBOX}';
+      `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=${process.env.MAPBOX}`;
     const attribution = `Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>
     contributors,<a href=https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery ©
     <a href="https://www.mapbox.com/">Mapbox</a>`;
@@ -141,6 +181,15 @@ export default class MapView extends Component {
             />
             {this.state.featureCollection.length > 0 && this.drawLines(this.state.featureCollection)}
           </FeatureGroup>
+          <div style={CustomControlStyle}>
+            <div style={ControlStyle}>
+              <span
+                className="icon-stack"
+                onClick={() => this.toggleSatellite(this.state.satellite)}
+                style={InnerStyle}
+              />
+            </div>
+          </div>
         </LeafletMap>
       </div>
     );

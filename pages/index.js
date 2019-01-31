@@ -28,6 +28,9 @@ export default () => (
         height: 100%;
         width: 100%;
       }
+
+      // icomoon fonts
+      @import 'static/fonts/style.css';
     `}</style>
   </div>
 )
