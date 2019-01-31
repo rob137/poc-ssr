@@ -1,6 +1,6 @@
 import TitleBar from './TitleBar';
 
-const Layout = (props) => (
+const Layout = (props: any) => (
   <div>
     <TitleBar />
     {props.children}

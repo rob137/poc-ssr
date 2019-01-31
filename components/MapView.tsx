@@ -2,8 +2,9 @@ import { Component } from 'react';
 import dynamic from 'next/dynamic';
 import '../static/MapView.scss';
 import Head from 'next/head';
-import classnames from 'classnames';
+import classnames from "classnames";
 
+// @ts-ignore
 const LeafletMap = dynamic(() => import('react-leaflet').then(module => {
   const { Map } = module;
   return Map;
@@ -11,6 +12,7 @@ const LeafletMap = dynamic(() => import('react-leaflet').then(module => {
   ssr: false,
 });
 
+// @ts-ignore
 const TileLayer = dynamic(() => import('react-leaflet').then(module => {
   const { TileLayer } = module;
   return TileLayer;
@@ -18,6 +20,7 @@ const TileLayer = dynamic(() => import('react-leaflet').then(module => {
   ssr: false,
 });
 
+// @ts-ignore
 const FeatureGroup = dynamic(() => import('react-leaflet').then(module => {
   const { FeatureGroup } = module;
   return FeatureGroup;
@@ -25,6 +28,7 @@ const FeatureGroup = dynamic(() => import('react-leaflet').then(module => {
   ssr: false,
 });
 
+// @ts-ignore
 const Polyline = dynamic(() => import('react-leaflet').then(module => {
   const { Polyline } = module;
   return Polyline;
@@ -32,6 +36,7 @@ const Polyline = dynamic(() => import('react-leaflet').then(module => {
   ssr: false,
 });
 
+// @ts-ignore
 const EditControl = dynamic(() => import('react-leaflet-draw').then(module => {
   const { EditControl } = module;
   return EditControl;
@@ -39,6 +44,7 @@ const EditControl = dynamic(() => import('react-leaflet-draw').then(module => {
   ssr: false,
 });
 
+// @ts-ignore
 const ZoomControl = dynamic(() => import('react-leaflet').then(module => {
   const { ZoomControl } = module;
   return ZoomControl;
@@ -46,8 +52,8 @@ const ZoomControl = dynamic(() => import('react-leaflet').then(module => {
   ssr: false,
 });
 
-export default class MapView extends Component {
-  constructor(props) {
+export default class MapView extends Component<any, any>{
+  constructor(props: any) {
     super(props);
     this.state = {
       featureCollection: [],
@@ -56,9 +62,10 @@ export default class MapView extends Component {
   }
 
   generateData() {
-    new Promise((resolve, reject) => {
+    new Promise((resolve) => {
       const line = [];
       for (let i = 0; i < 10; i++) {
+        // @ts-ignore
         line.push(L.latLng((Math.random() / 1000) + 51.747, (Math.random() / 1000) - 1.282868));
       }
       resolve(line);
@@ -77,18 +84,18 @@ export default class MapView extends Component {
     .catch((err) => console.error(err));
   }
 
-  setFeatureCollection(featureCollection) {
+  setFeatureCollection(featureCollection: any) {
     this.setState({ featureCollection: featureCollection });
   }
 
-  drawLines(featureCollection) {
-    return featureCollection.map((collection) => {
+  drawLines(featureCollection: any) {
+    return featureCollection.map((collection: any) => {
       return (<Polyline key={Math.random()} color={'maroon'} positions={collection._latlngs} />);
     });
   }
 
     // i.e. Satellite vs Map views
-    toggleSatellite(satellite) {
+    toggleSatellite(satellite: any) {
       this.setState({ satellite: !satellite });
     }
 
@@ -160,12 +167,12 @@ export default class MapView extends Component {
                   }
                   />
               </div>
-              {this.props.showSearchBox &&
+              {/* {this.props.showSearchBox &&
                 <SearchBox
-                  // tripList={this.props.tripList}
-                  // fetchTrip={this.props.fetchTrip}
+                  tripList={this.props.tripList}
+                  fetchTrip={this.props.fetchTrip}
                 />
-              }
+              } */}
             </div>
           </div>
         </LeafletMap>
