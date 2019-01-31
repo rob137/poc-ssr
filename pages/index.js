@@ -24,8 +24,7 @@ export default () => (
       body,
       #__next,
       #__next > div,
-      #__next > div > div,
-      #__next > div > div > div {
+      #__next > div > div {
         height: 100%;
         width: 100%;
       }

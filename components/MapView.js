@@ -99,11 +99,16 @@ export default class MapView extends Component {
       circlemarker: false,
     };
 
+    const MapViewStyle = {
+      height: 'calc(100% - 50px)',
+      width: '100%',
+    }
+
     const attribution = `Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>
     contributors,<a href=https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery ©
     <a href="https://www.mapbox.com/">Mapbox</a>`;
     return (
-      <div>
+      <div className="MapView" style={MapViewStyle}>
         <Head>
           <link rel="stylesheet" href="../static/leaflet_1.3.1.css" />
           <link rel="stylesheet" href="../static/leaflet-draw/leaflet.draw.css" />
@@ -113,7 +118,7 @@ export default class MapView extends Component {
           id='mapid'
           zoom={16}
           center={[51.74815077681456, -1.2823574152093544]}
-          style={{ height: 'calc(100% - 50px)' }}
+          style={{ height: '100%' }}
           zoomControl={false}
           preferCanvas={true}
           maxZoom={25}
