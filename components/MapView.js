@@ -120,10 +120,9 @@ export default class MapView extends Component {
           <script src="../static/leaflet.1.4.0.js"></script>
         </Head>
         <LeafletMap
-          id='mapid'
+          className={"MapView_map"}
           zoom={16}
           center={[51.74815077681456, -1.2823574152093544]}
-          style={{ height: '100%' }}
           zoomControl={false}
           preferCanvas={true}
           maxZoom={25}
