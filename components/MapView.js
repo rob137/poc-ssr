@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import dynamic from 'next/dynamic'
+import Head from 'next/head';
 
 const LeafletMap = dynamic(() => import('react-leaflet').then(module => {
   const { Map } = module;
@@ -93,6 +94,11 @@ export default class MapView extends Component {
 
     return (
       <div>
+        <Head>
+          <link rel="stylesheet" href="../static/leaflet_1.3.1.css" />
+          <link rel="stylesheet" href="../static/leaflet-draw/leaflet.draw.css" />
+          <script src="../static/leaflet.1.4.0.js"></script>
+        </Head>
         <LeafletMap
           id='mapid'
           zoom={16}
