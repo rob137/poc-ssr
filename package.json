@@ -2,7 +2,7 @@
   "name": "ssr-leaflet-test",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
