@@ -204,6 +204,14 @@ export default class MapView extends Component<{}, MapViewState>{
       this.setState({ showSearchBox });
     }
 
+    // When user saves an edit to an existing feature, we extract the new coords and
+  // overwrite the original
+  extractFeatureCollection(layers: any) {
+    const layerKeys = Object.keys(layers);
+    return layerKeys.map((key: string) => layers[key])
+    .filter((l: any) => l.options && l.options.color && l.options.color === 'maroon');
+  }
+
   componentDidMount() {
     this.generateData();
     this.getTripList();
@@ -256,6 +264,10 @@ export default class MapView extends Component<{}, MapViewState>{
               onDeleted={(e: any) => {
                 const keys = Object.keys(e.layers._layers);
                 keys.forEach((key) => this.removeLayer(e.layers._layers[key]));
+              }}
+              onEdited={(e: any) => {
+                const featureCollection = this.extractFeatureCollection(e.target._layers);
+                this.setFeatureCollection(featureCollection);
               }}
               position="topright"
               draw={drawControls}
