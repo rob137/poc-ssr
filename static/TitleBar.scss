@@ -1,13 +1,14 @@
 .TitleBar {
   position: fixed;
-  display: flex;
-  align-items: center;
+  top: 0;
   height: 50px;
   width: 100%;
-  background: white;
   z-index: 10000;
   margin: 0;
   user-select: none;
+  display: flex;
+  align-items: center;
+  background: white;
 }
 
 .TitleBar_logo {
