@@ -1,0 +1,17 @@
+.TitleBar {
+  position: fixed;
+  top: 0;
+  height: 50px;
+  width: 100%;
+  z-index: 10000;
+  margin: 0;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  background: white;
+}
+
+.TitleBar_logo {
+  height: 50px;
+  margin-left: 10px;
+}

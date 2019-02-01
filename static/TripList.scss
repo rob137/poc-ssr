@@ -1,0 +1,32 @@
+.TripList {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+  border-radius: 2px;
+  text-align: center;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.TripList_list {
+  font-size: 15px;
+}
+
+.TripList_list_item {
+  cursor: pointer;
+}
+
+.TripList_list_item:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.TripList_list_item:hover > .TripList_list_item_link {
+  color: #73b6e6;
+}
+
+.TripList_list_item_link {
+  color: #577dae;
+}
