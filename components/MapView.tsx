@@ -5,6 +5,7 @@ import Head from 'next/head';
 import '../static/MapView.scss';
 import fetch from 'isomorphic-unfetch';
 import classnames from "classnames";
+import { isEqual } from 'lodash';
 
 interface MapViewState {
   featureCollection: any[];
@@ -145,6 +146,21 @@ export default class MapView extends Component<{}, MapViewState>{
       return this.generateData();
     });
   }
+
+    // (to FeatureCollection)
+    addLayer(layer: any) {
+      const featureCollection = Object.assign(this.state.featureCollection);
+      featureCollection.push(layer);
+      this.setState({ featureCollection: featureCollection });
+    }
+  
+    // (from FeatureCollection)
+    removeLayer(layer: any) {
+      const newFeatureCollection = this.state.featureCollection.filter((collection: any) => {
+        return !isEqual(collection.editing.latlngs[0], layer.editing.latlngs[0]);
+      });
+      this.setFeatureCollection(newFeatureCollection);
+    }
 
   generateData() {
     new Promise((resolve) => {
