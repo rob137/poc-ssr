@@ -157,7 +157,9 @@ export default class MapView extends Component<{}, MapViewState>{
     // (from FeatureCollection)
     removeLayer(layer: any) {
       const newFeatureCollection = this.state.featureCollection.filter((collection: any) => {
-        return !isEqual(collection.editing.latlngs[0], layer.editing.latlngs[0]);
+        if (layer.editing !== undefined) {
+          return !isEqual(collection.editing.latlngs[0], layer.editing.latlngs[0]);
+        }
       });
       this.setFeatureCollection(newFeatureCollection);
     }
@@ -195,16 +197,16 @@ export default class MapView extends Component<{}, MapViewState>{
     });
   }
 
-    // i.e. Satellite vs Map views
-    toggleSatellite(satellite: boolean) {
-      this.setState({ satellite: !satellite });
-    }
+  // i.e. Satellite vs Map views
+  toggleSatellite(satellite: boolean) {
+    this.setState({ satellite: !satellite });
+  }
 
-    setShowSearchBox(showSearchBox: boolean) {
-      this.setState({ showSearchBox });
-    }
+  setShowSearchBox(showSearchBox: boolean) {
+    this.setState({ showSearchBox });
+  }
 
-    // When user saves an edit to an existing feature, we extract the new coords and
+  // When user saves an edit to an existing feature, we extract the new coords and
   // overwrite the original
   extractFeatureCollection(layers: any) {
     const layerKeys = Object.keys(layers);
@@ -288,7 +290,9 @@ export default class MapView extends Component<{}, MapViewState>{
               >
                 <span 
                   className={
-                    classnames('icon-search', 'customControls_control-inner', 'customControls_control-search')
+                    classnames(
+                      'icon-search', 'customControls_control-inner', 'customControls_control-search'
+                    )
                   }
                   />
               </div>
