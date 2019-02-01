@@ -137,7 +137,7 @@ export default class MapView extends Component<{}, MapViewState>{
       if (this.state.featureCollection.length === 0) {
         this.setFeatureCollection(featureCollection);
       } else {
-        // this.addLayer(featureCollection[0]);
+        this.addLayer(featureCollection[0]);
       }
     })
     .catch((err) => {
