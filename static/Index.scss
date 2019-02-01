@@ -17,8 +17,7 @@ code {
 html,
 body,
 #__next,
-#__next > div,
-#__next > div > div {
+#__next > div, {
   height: 100%;
   width: 100%;
 }
