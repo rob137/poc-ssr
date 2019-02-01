@@ -1,0 +1,64 @@
+[{
+  "name": "FV1",
+  "lastTasked": "2019-01-22T15:24:43.818Z",
+  "lastTaskId": 1234,
+  "status": "parked",
+  "position": "",
+  "image": "dynium-tractor-1.jpg",
+  "fuel": 45,
+  "rpm": 0
+}, {
+  "name": "FV2",
+  "lastTasked": "2019-01-22T15:10:10.818Z",
+  "lastTaskId": 2345,
+  "status": "working",
+  "position": "",
+  "image": "dynium-tractor-2.jpg",
+  "fuel": 80,
+  "rpm": 1500
+}, {
+  "name": "FV3",
+  "lastTasked": "2019-01-22T11:02:43.818Z",
+  "lastTaskId": 3456,
+  "status": "refueling",
+  "position": "",
+  "image": "dynium-tractor-3.jpg",
+  "fuel": 80,
+  "rpm": 0
+}, {
+  "name": "FV4",
+  "lastTasked": "2019-01-22T13:11:33.818Z",
+  "lastTaskId": 4567,
+  "status": "working",
+  "position": "",
+  "image": "dynium-tractor-4.jpg",
+  "fuel": 40,
+  "rpm": 2000
+}, {
+  "name": "FV5",
+  "lastTasked": "2019-01-22T10:20:30.818Z",
+  "lastTaskId": 5678,
+  "status": "parked",
+  "position": "",
+  "image": "dynium-tractor-5.png",
+  "fuel": 12,
+  "rpm": 0
+}, {
+  "name": "FV6",
+  "lastTasked": "2019-01-22T01:01:22.818Z",
+  "lastTaskId": 6789,
+  "status": "parked",
+  "position": "",
+  "image": "dynium-tractor-1.jpg",
+  "fuel": 100,
+  "rpm": 0
+}, {
+  "name": "FV7",
+  "lastTasked": "2019-01-22T14:13:32.818Z",
+  "lastTaskId": 7890,
+  "status": "parked",
+  "position": "",
+  "image": "dynium-tractor-2.jpg",
+  "fuel": 22,
+  "rpm": 0
+}]
