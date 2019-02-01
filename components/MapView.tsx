@@ -250,6 +250,13 @@ export default class MapView extends Component<{}, MapViewState>{
           <ZoomControl position="topright" />
           <FeatureGroup>
             <EditControl
+              onCreated={(e: any) => {
+                this.addLayer(e.layer);
+              }}
+              onDeleted={(e: any) => {
+                const keys = Object.keys(e.layers._layers);
+                keys.forEach((key) => this.removeLayer(e.layers._layers[key]));
+              }}
               position="topright"
               draw={drawControls}
             />
