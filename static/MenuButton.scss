@@ -1,0 +1,42 @@
+.MenuButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  width: calc(100% - 10px);
+  background-color: #fafafa;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 3px;
+  color: black;
+  text-decoration: none;
+  border: 0px;
+  padding: 0px;
+
+  &:not(:first-child) {
+    margin-top: 5px;
+  }
+
+  &:hover {
+    background-color: rgba(82, 119, 170, 0.1);
+    transition: 0.2s;
+  }
+
+  &-selected {
+    border: 2px solid rgba(82, 119, 170, 0.3);
+    background-color: rgba(82, 119, 170, 0.1);
+  }
+
+  &-innerWrapper {
+    margin-left: auto;
+    margin-right: auto;
+
+    &-icon {
+      margin-right: 10px;
+    }
+
+    &-title {
+      font-weight: normal;
+    }
+  }
+}

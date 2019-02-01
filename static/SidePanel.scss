@@ -1,0 +1,54 @@
+.SidePanel {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  z-index: 401;
+  height: calc(100% - 50px);
+  max-width: 500px;
+  width: 60%;
+  top: 50px;
+  left: 0;
+  pointer-events: none;
+
+  &_main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 0;
+    background: white;
+    pointer-events: auto;
+    transition: 0.08s;
+    box-shadow: 1px 1px #ededed;
+
+    &-show {
+      width: 90%;
+      transition: 0.08s;
+    }
+  }
+
+  &_toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 401;
+    height: 40px;
+    width: 40px;
+    left: 0;
+    background: white;
+    user-select: none;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+    pointer-events: auto;
+    transition: 0.08s;
+    box-shadow: 1px 1px #ededed;
+
+    &-hidden {
+      &:hover {
+        background-color: #EDF1F6;
+        transition: 0.2s;
+      }
+    }
+  }
+}
