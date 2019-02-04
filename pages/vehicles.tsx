@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
 import Layout from '../components/Layout';
-import SidePanel from '../components/SidePanel';
 import '../static/vehicles.scss';
 import Link from 'next/link';
 
@@ -20,8 +19,7 @@ export default class VehiclesPage extends Component<{}, {}> {
   render() {
     const data = require('../static/vehicles-data.json');
     return (
-      <Layout>
-        <SidePanel />
+      <Layout location="Vehicles">
         <div className="VehiclesPage">
           <div className="VehiclesPage_inner">
             {data.map((vehicle: Vehicle, key: number) => {
