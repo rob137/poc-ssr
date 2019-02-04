@@ -21,9 +21,10 @@ export default class MenuButton extends Component<MenuButtonProps, {}> {
       'Projects': 'icon-pencil',
       'Profile': 'icon-user',
     };
+    const title = this.props.title === 'Map' ? '' : this.props.title.toLowerCase();
     return (
       <Link
-        href={`/${this.props.title.toLowerCase()}`}
+        href={`/${title}`}
       >
         <button className={classnames(
           'MenuButton', { 'MenuButton-selected': this.props.selected },
