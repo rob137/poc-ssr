@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Component } from 'react';
 import MenuButton from './MenuButton';
 import '../static/SidePanel.scss';
 import classnames from 'classnames';
 
 interface SidePanelProps {
   location: string;
-  show?: boolean;
+  show: boolean;
+  toggleSidePanel: (show: boolean) => void;
 }
 
 const SidePanel = (props: SidePanelProps) => {
@@ -27,6 +27,7 @@ const SidePanel = (props: SidePanelProps) => {
         className={classnames(
           'SidePanel_toggle', { 'SidePanel_toggle-hidden': !props.show },
         )}
+        onClick={() => props.toggleSidePanel(props.show)}
       >
         {toggleIcon}
       </div>
