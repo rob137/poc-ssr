@@ -3,7 +3,7 @@ import MapView from '../components/MapView';
 import '../static/Index.scss';
 
 export default () => (
-  <Layout location='Map' showSidepanel={true}>
+  <Layout location='Map'>
     <MapView />
   </Layout>
 )
